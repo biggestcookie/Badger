@@ -1,0 +1,19 @@
+{
+  "name": "Badger",
+  "version": "0.1",
+  "description": "A Chrome extension that badgers you.",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "128": "icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": ""
+  },
+  "permissions": [],
+  "background": {
+    "persistent": false,
+    "page": "background.html",
+    "scripts": ["/js/browser-polyfill.min.js", "/js/background.js"]
+  }
+}
