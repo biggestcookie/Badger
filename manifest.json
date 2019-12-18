@@ -1,19 +1,17 @@
 {
   "name": "Badger",
   "version": "0.1",
-  "description": "A Chrome extension that badgers you.",
+  "description": "A web extension that will badger you to do things.",
+  "homepage_url": "https://github.com/biggestcookie/Badger",
   "manifest_version": 2,
-  "default_locale": "en",
-  "icons": {
-    "128": "icon_128.png"
-  },
-  "browser_action": {
-    "default_icon": ""
-  },
-  "permissions": [],
+  "icons": {},
+  "browser_action": { "default_popup": "popup/popup.html" },
+  "permissions": ["storage", "alarms"],
   "background": {
-    "persistent": false,
-    "page": "background.html",
-    "scripts": ["/js/browser-polyfill.min.js", "/js/background.js"]
+    "scripts": ["js/browser-polyfill.min.js", "js/background.js"]
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
   }
 }

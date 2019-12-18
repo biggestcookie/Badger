@@ -1,2 +1,3 @@
 # Badger
- A Chrome extension that badgers you.
+
+A web extension that will badger you to do things.
