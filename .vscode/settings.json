@@ -1,7 +1,0 @@
-{
-  "less.compile": {
-    "compress": true,
-    "sourceMap": true,
-    "outExt": ".min.css"
-  }
-}
