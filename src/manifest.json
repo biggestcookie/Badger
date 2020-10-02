@@ -1,6 +1,6 @@
 {
   "name": "Badger",
-  "description": "__MSG_manifestDesc__",
+  "description": "__MSG_manifestDescription__",
   "homepage_url": "https://github.com/biggestcookie/Badger",
   "developer": {
     "name": "bigcookie",
