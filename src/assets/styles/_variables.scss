@@ -3,11 +3,10 @@
 /* Fonts */
 $family-primary: "Karla", -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica,
   Arial, sans-serif;
-
-// $body-family: $family-primary;
+$family-secondary: "Work Sans", -apple-system, BlinkMacSystemFont, Segoe UI,
+  Helvetica, Arial, sans-serif;
 
 /* Colors */
-$blue: #68b1c7;
-$primary: $blue;
+$primary: #7ccbdf;
 
 @import "~bulma/bulma";

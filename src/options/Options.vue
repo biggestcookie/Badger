@@ -1,21 +1,23 @@
 <template>
-  <section class="section">
-    <div class="container">
-      <div class="columns">
-        <div class="column">
-          <div class="block">
-            <h1 class="title is-primary">
-              Hello
-            </h1>
-            <p>Subtitle</p>
+  <div id="app">
+    <section class="section">
+      <div class="container">
+        <div class="columns">
+          <div class="column">
+            <div class="block">
+              <h1 class="title is-family-secondary">
+                Hello
+              </h1>
+              <p>Subtitle</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .title {
   color: $primary;
 }
@@ -23,14 +25,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-// import Navbar from "@/components/Navbar.vue";
 
-// @Component({
-//   components: {
-//     Navbar,
-//     Foot
-//   }
-// })
 @Component
 export default class Options extends Vue {}
 </script>
