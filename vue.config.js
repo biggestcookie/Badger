@@ -12,20 +12,20 @@ module.exports = {
       title: "Options"
     }
   },
+  css: {
+    // sourceMap: process.env.NODE_ENV !== "production",
+    loaderOptions: {
+      sass: {
+        prependData: '@import "@/assets/styles/_variables.scss";'
+      }
+    }
+  },
   pluginOptions: {
     browserExtension: {
       componentOptions: {
         background: {
           entry: "src/background.ts"
         }
-      }
-    }
-  },
-  css: {
-    sourceMap: process.env.NODE_ENV !== "production",
-    loaderOptions: {
-      sass: {
-        prependData: '@import "@/assets/styles/_variables.scss";'
       }
     }
   }
