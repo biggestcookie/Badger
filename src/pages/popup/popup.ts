@@ -4,5 +4,5 @@ import Popup from "./Popup.vue";
 Vue.config.productionTip = false;
 
 new Vue({
-  render: (h) => h(Popup),
+  render: h => h(Popup)
 }).$mount("#app");

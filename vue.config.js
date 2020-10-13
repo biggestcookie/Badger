@@ -3,12 +3,12 @@ module.exports = {
   pages: {
     popup: {
       template: "public/index.html",
-      entry: "./src/popup/main.ts",
+      entry: "./src/pages/popup/popup.ts",
       title: "Badger"
     },
     options: {
       template: "public/index.html",
-      entry: "./src/options/main.ts",
+      entry: "./src/pages/options/options.ts",
       title: "Badger - Settings"
     }
   },

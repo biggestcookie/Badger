@@ -4,5 +4,5 @@ import Options from "./Options.vue";
 Vue.config.productionTip = false;
 
 new Vue({
-  render: (h) => h(Options),
+  render: h => h(Options)
 }).$mount("#app");
