@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "bulma": "^0.9.1",
+    "chrome-extension-async": "^3.4.1",
     "core-js": "^3.6.5",
     "ionicons": "^5.1.2",
     "vue": "^2.6.11",
@@ -17,6 +18,7 @@
     "vue-property-decorator": "^8.4.2"
   },
   "devDependencies": {
+    "@types/chrome": "0.0.124",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "@vue/cli-plugin-babel": "~4.5.0",

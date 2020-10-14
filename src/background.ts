@@ -1,5 +1,15 @@
-// import { browser } from "webextension-polyfill-ts";
+import { NotificationService } from "@/services/notification.service";
+import { StorageService } from "./services/storage.service";
 
-function init() {}
+class BackgroundApp {
+  private readonly notificationService = new NotificationService();
+  private readonly storageService = new StorageService();
 
-init();
+  init() {
+    this.notificationService.init();
+    this.storageService.init();
+  }
+}
+
+const app = new BackgroundApp();
+app.init();

@@ -23,37 +23,13 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { browser, Notifications } from "webextension-polyfill-ts";
+import { NotificationService } from "@/services/notification.service";
 
 @Component
 export default class Popup extends Vue {
-  mounted() {
-    browser.notifications.onButtonClicked.addListener((notif, button) =>
-      console.log(`Notif: ${notif} button: ${button}`)
-    );
-  }
+  private readonly notificationService = new NotificationService();
   testNotif() {
-    const c = {
-      iconUrl: "icons/16.png",
-      type: "basic",
-      title: "Notif title",
-      message: "message",
-      contextMessage: "context",
-      priority: 2,
-      eventTime: Date.now(),
-      isClickable: false,
-      buttons: [
-        {
-          title: "button1"
-        },
-        {
-          title: "button2"
-        }
-      ]
-    };
-    browser.notifications
-      .create("test", c as Notifications.CreateNotificationOptions)
-      .then(() => console.log("notif made"));
+    this.notificationService.testNotif();
   }
 }
 </script>

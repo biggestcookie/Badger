@@ -1,4 +1,8 @@
 module.exports = {
+  chainWebpack(config) {
+    config.plugins.delete("provide-webextension-polyfill");
+    config.module.rules.delete("provide-webextension-polyfill");
+  },
   lintOnSave: false,
   pages: {
     popup: {
