@@ -3,8 +3,13 @@ import notifications = chrome.notifications;
 import NotificationOptions = chrome.notifications.NotificationOptions;
 
 export class NotificationService {
-  init() {
+  constructor() {
+    this.init();
+  }
+
+  private init() {
     this.registerButtonListeners();
+    chrome.storage.local.clear();
   }
 
   registerButtonListeners() {

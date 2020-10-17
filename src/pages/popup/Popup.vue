@@ -7,7 +7,7 @@
             <h1 class="title">
               hello
             </h1>
-            <a class="button" @click="testNotif">Click for notif</a>
+            <a class="button" @click="testStatic">Click for notif</a>
           </div>
         </div>
       </div>
