@@ -1,5 +1,5 @@
 import "chrome-extension-async";
-import notifications = chrome.notifications;
+import Notifications = chrome.notifications;
 import NotificationOptions = chrome.notifications.NotificationOptions;
 
 export class NotificationService {
@@ -13,7 +13,7 @@ export class NotificationService {
   }
 
   registerButtonListeners() {
-    notifications.onButtonClicked.addListener((notif, button) =>
+    Notifications.onButtonClicked.addListener((notif, button) =>
       console.log(`Notif: ${notif} button: ${button}`)
     );
   }
@@ -38,6 +38,6 @@ export class NotificationService {
         }
       ]
     };
-    notifications.create("test", c);
+    Notifications.create("test", c);
   }
 }

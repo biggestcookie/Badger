@@ -1,6 +1,5 @@
 import "chrome-extension-async";
 
-
 export class MessagingService {
   constructor() {
     this.init();
@@ -9,7 +8,5 @@ export class MessagingService {
     this.registerMessageListeners();
   }
 
-  private registerMessageListeners() {
-
-  }
+  private registerMessageListeners() {}
 }

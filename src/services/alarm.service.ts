@@ -1,4 +1,4 @@
 import "chrome-extension-async";
-import alarms = chrome.alarms;
+import Alarms = chrome.alarms;
 
 export class AlarmService {}

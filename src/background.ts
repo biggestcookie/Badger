@@ -1,17 +1,20 @@
 import { NotificationService } from "@/services/notification.service";
-import { StorageService } from "./services/storage.service";
-import runtime = chrome.runtime;
+import { BadgerService } from "./services/badger.service";
+import Runtime = chrome.runtime;
 
-class BackgroundApp {
-  private readonly notificationService = new NotificationService();
-  private readonly storageService = new StorageService();
+export class BackgroundApp {
   static userPrefs: object;
+  static badgers: Badger[] = [];
+  private readonly notificationService = new NotificationService();
+  private readonly storageService = new BadgerService();
+
   init() {
+    console.log(BackgroundApp.badgers);
     this.registerMessagingListeners();
   }
 
   registerMessagingListeners() {
-    runtime.onMessage.addListener((message: any) => {
+    Runtime.onMessage.addListener((message: any) => {
       alert(message);
     });
   }
