@@ -2,9 +2,11 @@ import "chrome-extension-async";
 import Runtime = chrome.runtime;
 
 export class MessagingService {
-  registerBackgroundListeners() {}
+  registerBackgroundListeners() {
+    // Runtime.onMessage()
+  }
 
-  postBadger(newBadger: Badger) {
+  setBadger(newBadger: Badger) {
     // Runtime.sendMessage()
   }
 
@@ -12,7 +14,7 @@ export class MessagingService {
     // Runtime.sendMessage()
   }
 
-  removeBadger(newBadger: Badger) {
+  deleteBadger(newBadger: Badger) {
     // Runtime.sendMessage()
   }
 }

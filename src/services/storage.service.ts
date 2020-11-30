@@ -2,7 +2,7 @@ import { BackgroundApp } from "@/background";
 import "chrome-extension-async";
 import Sync = chrome.storage.sync;
 
-export class BadgerService {
+export class StorageService {
   constructor() {
     this.init();
   }
@@ -12,7 +12,7 @@ export class BadgerService {
       id: 1,
       name: "mock badger"
     } as Badger;
-    this.setBadger(mockBadger);
+    this.storeBadger(mockBadger);
 
     BackgroundApp.badgers = await this.fetchAllBadgers();
   }
@@ -21,12 +21,12 @@ export class BadgerService {
     return Sync.get("badgers");
   }
 
-  setBadger(newBadger: Badger) {
+  storeBadger(newBadger: Badger) {
     BackgroundApp.badgers.set(newBadger.id, newBadger);
     Sync.set({ badgers: BackgroundApp.badgers });
   }
 
-  deleteBadger(badgerId: number) {
+  removeBadger(badgerId: number) {
     BackgroundApp.badgers.delete(badgerId);
     Sync.set({ badgers: BackgroundApp.badgers });
   }

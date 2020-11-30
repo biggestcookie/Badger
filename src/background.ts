@@ -1,5 +1,6 @@
 import { NotificationService } from "@/services/notification.service";
-import { BadgerService } from "./services/badger.service";
+import { MessagingService } from "@/services/messaging.service";
+import { StorageService } from "@/services/storage.service";
 import Runtime = chrome.runtime;
 
 export class BackgroundApp {
@@ -7,17 +8,13 @@ export class BackgroundApp {
   static badgers: Map<number, Badger> = new Map();
 
   private readonly notificationService = new NotificationService();
-  private readonly storageService = new BadgerService();
+  private readonly messagingService = new MessagingService();
+  private readonly storageService = new StorageService();
 
   init() {
-    console.log(BackgroundApp.badgers);
-    this.registerMessagingListeners();
-  }
+    this.messagingService.registerBackgroundListeners();
 
-  registerMessagingListeners() {
-    Runtime.onMessage.addListener((message: any) => {
-      alert(message);
-    });
+    console.log(BackgroundApp.badgers);
   }
 }
 
