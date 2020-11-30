@@ -1,12 +1,18 @@
 import "chrome-extension-async";
+import Runtime = chrome.runtime;
 
 export class MessagingService {
-  constructor() {
-    this.init();
-  }
-  private init() {
-    this.registerMessageListeners();
+  registerBackgroundListeners() {}
+
+  postBadger(newBadger: Badger) {
+    // Runtime.sendMessage()
   }
 
-  private registerMessageListeners() {}
+  fetchBadgers(): Badger[] {
+    // Runtime.sendMessage()
+  }
+
+  removeBadger(newBadger: Badger) {
+    // Runtime.sendMessage()
+  }
 }

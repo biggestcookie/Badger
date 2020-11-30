@@ -4,7 +4,8 @@ import Runtime = chrome.runtime;
 
 export class BackgroundApp {
   static userPrefs: object;
-  static badgers: Badger[] = [];
+  static badgers: Map<number, Badger> = new Map();
+
   private readonly notificationService = new NotificationService();
   private readonly storageService = new BadgerService();
 

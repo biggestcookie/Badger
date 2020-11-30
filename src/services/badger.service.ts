@@ -12,17 +12,22 @@ export class BadgerService {
       id: 1,
       name: "mock badger"
     } as Badger;
-    this.createBadger(mockBadger);
+    this.setBadger(mockBadger);
 
     BackgroundApp.badgers = await this.fetchAllBadgers();
   }
 
-  async fetchAllBadgers(): Promise<Badger[]> {
-    return Sync.get("badgers") as Promise<Badger[]>;
+  async fetchAllBadgers(): Promise<any> {
+    return Sync.get("badgers");
   }
 
-  createBadger(newBadger: Badger) {
-    BackgroundApp.badgers.push(newBadger);
+  setBadger(newBadger: Badger) {
+    BackgroundApp.badgers.set(newBadger.id, newBadger);
+    Sync.set({ badgers: BackgroundApp.badgers });
+  }
+
+  deleteBadger(badgerId: number) {
+    BackgroundApp.badgers.delete(badgerId);
     Sync.set({ badgers: BackgroundApp.badgers });
   }
 }
