@@ -1,36 +1,45 @@
 import { BackgroundApp } from "@/background";
 import { Badger } from "@/models/badger.model";
 import "chrome-extension-async";
-import Sync = chrome.storage.sync;
+import Local = chrome.storage.local;
 
 export class StorageService {
-  // constructor() {
-  //   this.init();
-  // }
+  constructor() {
+    this.init();
+  }
 
-  // private async init() {
-  //   const mockBadger = {
-  //     id: 1,
-  //     name: "mock badger"
-  //   } as Badger;
-  //   this.storeBadger(mockBadger);
-  // }
+  async init() {
+    const [badgerRecord, prefsRecord] = await Promise.all([
+      this.fetchBadgerMap(),
+      this.fetchUserPrefs()
+    ]);
+    if (!badgerRecord.badgers || prefsRecord.prefs) {
+      await this.initStorage();
+    }
+
+    BackgroundApp.badgers = badgerRecord.badgers;
+    BackgroundApp.userPrefs = prefsRecord.prefs;
+  }
+
+  async initStorage(): Promise<void> {
+    return Local.set({ badgers: {}, prefs: {} });
+  }
 
   async fetchUserPrefs(): Promise<any> {
-    return Sync.get("prefs");
+    return Local.get("prefs");
   }
 
   async fetchBadgerMap(): Promise<any> {
-    return Sync.get("badgers");
+    return Local.get("badgers");
   }
 
-  storeBadger(newBadger: Badger) {
-    BackgroundApp.badgers.set(newBadger.id, newBadger);
-    Sync.set({ badgers: BackgroundApp.badgers });
+  async storeBadger(newBadger: Badger): Promise<void> {
+    BackgroundApp.badgers[newBadger.id] = newBadger;
+    return Local.set({ badgers: BackgroundApp.badgers });
   }
 
-  removeBadger(badgerId: number) {
-    BackgroundApp.badgers.delete(badgerId);
-    Sync.set({ badgers: BackgroundApp.badgers });
+  async removeBadger(badgerId: number): Promise<void> {
+    delete BackgroundApp.badgers[badgerId];
+    return Local.set({ badgers: BackgroundApp.badgers });
   }
 }

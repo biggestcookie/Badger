@@ -9,6 +9,8 @@
                 Hello
               </h1>
               <p>Subtitle</p>
+              <a class="button" @click="create">Click to create</a>
+              <a class="button" @click="fetchAll">Click for notif</a>
             </div>
           </div>
         </div>
@@ -18,14 +20,28 @@
 </template>
 
 <style lang="scss">
-.title {
-  color: $primary;
+* {
+  color: $black;
 }
 </style>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import * as Messaging from "@/utils/messaging";
+import { Badger } from "@/models/badger.model";
 
 @Component
-export default class Options extends Vue {}
+export default class Popup extends Vue {
+  async create() {
+    const mockBadger = {
+      id: 1,
+      name: "mock badger"
+    } as Badger;
+    await Messaging.setBadger(mockBadger);
+  }
+  async fetchAll() {
+    const allBadgers = await Messaging.fetchBadgers();
+    console.log(allBadgers);
+  }
+}
 </script>

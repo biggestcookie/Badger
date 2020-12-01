@@ -8,8 +8,8 @@ export class BackgroundApp {
   private readonly notificationService: NotificationService;
   private readonly storageService: StorageService;
 
-  static userPrefs = {};
-  static badgers: Map<number, Badger> = new Map();
+  static userPrefs: Record<string, any>;
+  static badgers: Record<number, Badger>;
 
   constructor() {
     this.notificationService = new NotificationService();
@@ -17,27 +17,24 @@ export class BackgroundApp {
   }
 
   async init() {
-    // BackgroundApp.badgers = await this.storageService.fetchBadgerMap();
-    BackgroundApp.userPrefs = await this.storageService.fetchUserPrefs();
-
     this.registerBackgroundListeners();
-
-    // console.log(BackgroundApp.badgers);
   }
 
   registerBackgroundListeners() {
-    Runtime.onMessage.addListener((msg, _, sendResponse) => {
+    Runtime.onMessage.addListener(async (msg, _, sendResponse) => {
       switch (msg.type) {
         case MessageType.FETCH: {
-          sendResponse(BackgroundApp.badgers.values());
+          sendResponse(BackgroundApp.badgers);
           break;
         }
         case MessageType.POST: {
-          this.storageService.storeBadger(msg.badger);
+          await this.storageService.storeBadger(msg.badger);
+          sendResponse(null);
           break;
         }
         case MessageType.DELETE: {
-          this.storageService.removeBadger(msg.badgerId);
+          await this.storageService.removeBadger(msg.badgerId);
+          sendResponse(null);
           break;
         }
       }

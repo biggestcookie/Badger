@@ -12,21 +12,22 @@ export async function fetchBadgers(): Promise<Badger[]> {
   const fetchMessage: BaseMessage = {
     type: MessageType.FETCH
   };
-  return Runtime.sendMessage(fetchMessage);
+  const badgerMap = await Runtime.sendMessage(fetchMessage);
+  return Object.values(badgerMap);
 }
 
-export function setBadger(newBadger: Badger) {
-  const fetchMessage: PostMessage = {
+export async function setBadger(newBadger: Badger) {
+  const postMessage: PostMessage = {
     type: MessageType.POST,
     badger: newBadger
   };
-  Runtime.sendMessage(fetchMessage);
+  await Runtime.sendMessage(postMessage);
 }
 
-export function deleteBadger(badgerId: number) {
+export async function deleteBadger(badgerId: number) {
   const deleteMessage: DeleteMessage = {
     type: MessageType.DELETE,
     badgerId
   };
-  Runtime.sendMessage(deleteMessage);
+  await Runtime.sendMessage(deleteMessage);
 }

@@ -28,17 +28,5 @@ import * as Messaging from "@/utils/messaging";
 import { Badger } from "@/models/badger.model";
 
 @Component
-export default class Popup extends Vue {
-  create() {
-    const mockBadger = {
-      id: 1,
-      name: "mock badger"
-    } as Badger;
-    Messaging.setBadger(mockBadger);
-  }
-  async fetchAll() {
-    const allBadgers = await Messaging.fetchBadgers();
-    console.log(allBadgers);
-  }
-}
+export default class Popup extends Vue {}
 </script>
