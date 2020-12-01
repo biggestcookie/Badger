@@ -1,17 +1,19 @@
-enum MessageType {
+import { Badger } from "./badger.model";
+
+export enum MessageType {
   POST,
   FETCH,
   DELETE
 }
 
-interface BaseMessage {
+export interface BaseMessage {
   type: MessageType;
 }
 
-interface PostMessage extends BaseMessage {
+export interface PostMessage extends BaseMessage {
   badger: Badger;
 }
 
-interface DeleteMessage extends BaseMessage {
-  id: number;
+export interface DeleteMessage extends BaseMessage {
+  badgerId: number;
 }

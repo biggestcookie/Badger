@@ -1,23 +1,26 @@
 import { BackgroundApp } from "@/background";
+import { Badger } from "@/models/badger.model";
 import "chrome-extension-async";
 import Sync = chrome.storage.sync;
 
 export class StorageService {
-  constructor() {
-    this.init();
+  // constructor() {
+  //   this.init();
+  // }
+
+  // private async init() {
+  //   const mockBadger = {
+  //     id: 1,
+  //     name: "mock badger"
+  //   } as Badger;
+  //   this.storeBadger(mockBadger);
+  // }
+
+  async fetchUserPrefs(): Promise<any> {
+    return Sync.get("prefs");
   }
 
-  private async init() {
-    const mockBadger = {
-      id: 1,
-      name: "mock badger"
-    } as Badger;
-    this.storeBadger(mockBadger);
-
-    BackgroundApp.badgers = await this.fetchAllBadgers();
-  }
-
-  async fetchAllBadgers(): Promise<any> {
+  async fetchBadgerMap(): Promise<any> {
     return Sync.get("badgers");
   }
 

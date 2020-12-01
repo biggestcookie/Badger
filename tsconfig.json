@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es6",
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
@@ -14,7 +14,6 @@
     "baseUrl": ".",
     "types": [
       "webpack-env",
-      "chrome"
     ],
     "paths": {
       "@/*": [
@@ -22,7 +21,7 @@
       ]
     },
     "lib": [
-      "esnext",
+      "es6",
       "dom",
       "dom.iterable",
       "scripthost"

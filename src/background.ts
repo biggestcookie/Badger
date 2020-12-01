@@ -1,20 +1,48 @@
+import { Badger } from "@/models/badger.model";
+import { MessageType } from "@/models/message.model";
 import { NotificationService } from "@/services/notification.service";
-import { MessagingService } from "@/services/messaging.service";
 import { StorageService } from "@/services/storage.service";
 import Runtime = chrome.runtime;
 
 export class BackgroundApp {
-  static userPrefs: object;
+  private readonly notificationService: NotificationService;
+  private readonly storageService: StorageService;
+
+  static userPrefs = {};
   static badgers: Map<number, Badger> = new Map();
 
-  private readonly notificationService = new NotificationService();
-  private readonly messagingService = new MessagingService();
-  private readonly storageService = new StorageService();
+  constructor() {
+    this.notificationService = new NotificationService();
+    this.storageService = new StorageService();
+  }
 
-  init() {
-    this.messagingService.registerBackgroundListeners();
+  async init() {
+    // BackgroundApp.badgers = await this.storageService.fetchBadgerMap();
+    BackgroundApp.userPrefs = await this.storageService.fetchUserPrefs();
 
-    console.log(BackgroundApp.badgers);
+    this.registerBackgroundListeners();
+
+    // console.log(BackgroundApp.badgers);
+  }
+
+  registerBackgroundListeners() {
+    Runtime.onMessage.addListener((msg, _, sendResponse) => {
+      switch (msg.type) {
+        case MessageType.FETCH: {
+          sendResponse(BackgroundApp.badgers.values());
+          break;
+        }
+        case MessageType.POST: {
+          this.storageService.storeBadger(msg.badger);
+          break;
+        }
+        case MessageType.DELETE: {
+          this.storageService.removeBadger(msg.badgerId);
+          break;
+        }
+      }
+      return true;
+    });
   }
 }
 

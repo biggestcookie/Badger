@@ -19,7 +19,7 @@ export class NotificationService {
   }
 
   testNotif() {
-    const c: NotificationOptions = {
+    const c = {
       iconUrl: "icons/16.png",
       type: "basic",
       title: "Notif title",
@@ -37,7 +37,7 @@ export class NotificationService {
           title: "button2"
         }
       ]
-    };
+    } as NotificationOptions;
     Notifications.create("test", c);
   }
 }

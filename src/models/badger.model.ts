@@ -1,6 +1,6 @@
 type HourMinute = [number, number];
 
-interface Badger {
+export interface Badger {
   id: number;
   name: string;
   days: number[];

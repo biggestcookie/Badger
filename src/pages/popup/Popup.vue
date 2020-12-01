@@ -7,7 +7,8 @@
             <h1 class="title">
               hello
             </h1>
-            <a class="button" @click="testStatic">Click for notif</a>
+            <a class="button" @click="create">Click to create</a>
+            <a class="button" @click="fetchAll">Click for notif</a>
           </div>
         </div>
       </div>
@@ -23,13 +24,21 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { NotificationService } from "@/services/notification.service";
+import * as Messaging from "@/utils/messaging";
+import { Badger } from "@/models/badger.model";
 
 @Component
 export default class Popup extends Vue {
-  private readonly notificationService = new NotificationService();
-  testNotif() {
-    this.notificationService.testNotif();
+  create() {
+    const mockBadger = {
+      id: 1,
+      name: "mock badger"
+    } as Badger;
+    Messaging.setBadger(mockBadger);
+  }
+  async fetchAll() {
+    const allBadgers = await Messaging.fetchBadgers();
+    console.log(allBadgers);
   }
 }
 </script>
