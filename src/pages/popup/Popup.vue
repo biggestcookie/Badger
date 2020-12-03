@@ -7,8 +7,14 @@
             <h1 class="title">
               hello
             </h1>
-            <a class="button" @click="create">Click to create</a>
-            <a class="button" @click="fetchAll">Click for notif</a>
+            <a class="button" @click="create">
+              Click for badger
+            </a>
+            <div v-for="badger in badgers" v-bind:key="badger.id" class="card">
+              <div class="card-content">
+                {{ badger.name }}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -25,8 +31,24 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import * as Messaging from "@/utils/messaging";
-import { Badger } from "@/models/badger.model";
+import { Badger, Weekday } from "@/models/badger.model";
 
 @Component
-export default class Popup extends Vue {}
+export default class Popup extends Vue {
+  badgers: Badger[] = [];
+
+  async mounted() {
+    this.badgers = await Messaging.fetchBadgers();
+  }
+
+  async create() {
+    const mockBadger = {
+      id: 1,
+      name: "mock badger",
+      days: [Weekday.SUNDAY, Weekday.MONDAY]
+    } as Badger;
+    await Messaging.setBadger(mockBadger);
+    this.badgers.push(mockBadger);
+  }
+}
 </script>

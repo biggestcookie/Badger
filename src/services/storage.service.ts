@@ -18,6 +18,8 @@ export class StorageService {
     }
 
     BackgroundApp.badgers = badgerRecord.badgers;
+    console.log(badgerRecord);
+    console.log(BackgroundApp.badgers);
     BackgroundApp.userPrefs = prefsRecord.prefs;
   }
 

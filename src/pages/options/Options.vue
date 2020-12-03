@@ -28,16 +28,17 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import * as Messaging from "@/utils/messaging";
-import { Badger } from "@/models/badger.model";
+import { Badger, Weekday } from "@/models/badger.model";
 
 @Component
 export default class Popup extends Vue {
-  async create() {
+  create() {
     const mockBadger = {
       id: 1,
-      name: "mock badger"
+      name: "mock badger",
+      days: [Weekday.SUNDAY, Weekday.MONDAY]
     } as Badger;
-    await Messaging.setBadger(mockBadger);
+    Messaging.setBadger(mockBadger);
   }
   async fetchAll() {
     const allBadgers = await Messaging.fetchBadgers();

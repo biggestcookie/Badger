@@ -13,7 +13,7 @@ export async function fetchBadgers(): Promise<Badger[]> {
     type: MessageType.FETCH
   };
   const badgerMap = await Runtime.sendMessage(fetchMessage);
-  return Object.values(badgerMap);
+  return badgerMap ? Object.values(badgerMap) : [];
 }
 
 export async function setBadger(newBadger: Badger) {
