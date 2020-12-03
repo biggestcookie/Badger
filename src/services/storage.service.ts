@@ -15,15 +15,16 @@ export class StorageService {
     ]);
     if (!badgerRecord.badgers || prefsRecord.prefs) {
       await this.initStorage();
+      BackgroundApp.badgers = {};
+      BackgroundApp.userPrefs = {};
+    } else {
+      BackgroundApp.badgers = badgerRecord.badgers;
+      BackgroundApp.userPrefs = prefsRecord.prefs;
     }
-
-    BackgroundApp.badgers = badgerRecord.badgers;
-    console.log(badgerRecord);
-    console.log(BackgroundApp.badgers);
-    BackgroundApp.userPrefs = prefsRecord.prefs;
   }
 
   async initStorage(): Promise<void> {
+    console.log("Initializing storage");
     return Local.set({ badgers: {}, prefs: {} });
   }
 

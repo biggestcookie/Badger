@@ -43,7 +43,7 @@ export default class Popup extends Vue {
 
   async create() {
     const mockBadger = {
-      id: 1,
+      id: new Date().getTime(),
       name: "mock badger",
       days: [Weekday.SUNDAY, Weekday.MONDAY]
     } as Badger;

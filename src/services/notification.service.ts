@@ -9,7 +9,6 @@ export class NotificationService {
 
   private init() {
     this.registerButtonListeners();
-    chrome.storage.local.clear();
   }
 
   registerButtonListeners() {

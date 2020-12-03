@@ -6,7 +6,7 @@
           <div class="column">
             <div class="block">
               <h1 class="title is-family-secondary">
-                Hello
+                Hello!
               </h1>
               <p>Subtitle</p>
               <a class="button" @click="create">Click to create</a>
