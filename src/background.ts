@@ -1,5 +1,9 @@
 import { Badger } from "@/models/badger.model";
-import { MessageType } from "@/models/message.model";
+import {
+  DeleteMessage,
+  MessageType,
+  PostMessage
+} from "@/models/message.model";
 import { NotificationService } from "@/services/notification.service";
 import { StorageService } from "@/services/storage.service";
 import Runtime = chrome.runtime;
@@ -21,25 +25,31 @@ export class BackgroundApp {
   }
 
   registerBackgroundListeners() {
-    Runtime.onMessage.addListener(async (msg, _, sendResponse) => {
+    Runtime.onMessage.addListener((msg, _, sendResponse) => {
       switch (msg.type) {
-        case MessageType.FETCH: {
+        case MessageType.FETCH:
           sendResponse(BackgroundApp.badgers);
           break;
-        }
-        case MessageType.POST: {
-          await this.storageService.storeBadger(msg.badger);
-          sendResponse(null);
+        case MessageType.POST:
+          this.onPost(msg, sendResponse);
           break;
-        }
-        case MessageType.DELETE: {
-          await this.storageService.removeBadger(msg.badgerId);
-          sendResponse(null);
+        case MessageType.DELETE:
+          this.onDelete(msg, sendResponse);
           break;
-        }
       }
       return true;
     });
+  }
+
+  async onPost(msg: PostMessage, sendResponse: (response: any) => void) {
+    // TODO: Register alarm
+    await this.storageService.storeBadger(msg.badger);
+    sendResponse(true);
+  }
+
+  async onDelete(msg: DeleteMessage, sendResponse: (response: any) => void) {
+    await this.storageService.removeBadger(msg.badgerId);
+    sendResponse(true);
   }
 }
 
