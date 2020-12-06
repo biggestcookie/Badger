@@ -4,24 +4,27 @@ import {
   MessageType,
   PostMessage
 } from "@/models/message.model";
-import { NotificationService } from "@/services/notification.service";
+import { AlarmService } from "@/services/alarm.service";
 import { StorageService } from "@/services/storage.service";
+import { UserPrefs } from "./models/prefs.model";
 import Runtime = chrome.runtime;
 
 export class BackgroundApp {
-  private readonly notificationService: NotificationService;
+  private readonly alarmService: AlarmService;
   private readonly storageService: StorageService;
 
-  static userPrefs: Record<string, any>;
+  static userPrefs: UserPrefs;
   static badgers: Record<number, Badger>;
 
   constructor() {
-    this.notificationService = new NotificationService();
+    this.alarmService = new AlarmService();
     this.storageService = new StorageService();
+    this.init();
   }
 
   async init() {
     this.registerBackgroundListeners();
+    this.alarmService.registerCurrentAlarms();
   }
 
   registerBackgroundListeners() {
@@ -44,6 +47,7 @@ export class BackgroundApp {
   async onPost(msg: PostMessage, sendResponse: (response: any) => void) {
     // TODO: Register alarm
     await this.storageService.storeBadger(msg.badger);
+    this.alarmService.createAlarm(msg.badger);
     sendResponse(true);
   }
 
@@ -54,4 +58,3 @@ export class BackgroundApp {
 }
 
 const app = new BackgroundApp();
-app.init();
