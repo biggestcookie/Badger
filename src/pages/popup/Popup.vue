@@ -29,11 +29,10 @@
 </style>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Vue } from "vue-class-component";
 import * as Messaging from "@/utils/messaging";
 import { Badger, Weekday } from "@/models/badger.model";
 
-@Component
 export default class Popup extends Vue {
   badgers: Badger[] = [];
 
