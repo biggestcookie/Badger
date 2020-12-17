@@ -14,12 +14,17 @@ export class AlarmService {
   }
 
   init() {
-    // clear previous alarms if necessary?
-    Alarms.onAlarm((name: string) => {
-      const currentBadger = BackgroundApp.badgers[Number(name)];
+    Alarms.clearAll(); // Remove if unnecessary
+    this.registerAlarmListener();
+  }
+
+  registerAlarmListener() {
+    Alarms.onAlarm.addListener(async alarm => {
+      const currentBadger = BackgroundApp.badgers[Number(alarm.name)];
       this.notificationService.fireNotif(currentBadger);
       if (!this.isBadgerActive(currentBadger)) {
-        // delete alarm
+        const x = await Alarms.clear(alarm.name);
+        console.log(`Alarm was deleted: ${x}`);
         this.createAlarm(currentBadger);
       }
     });
