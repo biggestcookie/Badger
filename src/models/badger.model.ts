@@ -15,6 +15,7 @@ export interface Badger {
   name: string;
   description?: string;
   days: Weekday[];
+  interval: number;
   startTimes: HourMinute[];
   endTimes: HourMinute[];
 }

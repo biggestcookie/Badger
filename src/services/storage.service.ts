@@ -26,7 +26,12 @@ export class StorageService {
 
   async createUserData(): Promise<void> {
     console.log("Initializing storage");
-    return Local.set({ badgers: {}, prefs: {} });
+    return Local.set({
+      badgers: {},
+      prefs: {
+        // snoozeTime: config.defaultPrefs.snoozeTime
+      }
+    });
   }
 
   async fetchUserPrefs(): Promise<any> {

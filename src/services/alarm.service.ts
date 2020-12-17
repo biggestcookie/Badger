@@ -1,4 +1,4 @@
-import config from "@/assets/config.json";
+
 import { BackgroundApp } from "@/background";
 import { Badger } from "@/models/badger.model";
 import { NotificationService } from "@/services/notification.service";
@@ -38,20 +38,30 @@ export class AlarmService {
 
   createAlarm(badger: Badger) {
     const nextAlarmTime = this.findNextAlarmTime(badger);
-    // register alarm
+    const newAlarm: Alarms.AlarmCreateInfo = {
+      when: nextAlarmTime,
+      periodInMinutes: badger.interval
+    };
+    Alarms.create(badger.name, newAlarm);
   }
 
+  /*   
   createSnoozedAlarm(badger: Badger) {
+    // Need way to reference existing alarm info with alarm name
     const nextAlarmTime = this.findSnoozedAlarmTime();
-  }
-
-  isBadgerActive(badger: Badger): boolean {
-    const currentDate = new Date();
-  }
-
+    Alarms.create({
+      when: nextAlarmTime
+    });
+  } 
+  
   findSnoozedAlarmTime(): number {
     const snoozeMinutes =
       BackgroundApp.userPrefs.snoozeTime || config.defaultPrefs.snoozeTime;
+  } 
+  */
+
+  isBadgerActive(badger: Badger): boolean {
+    const currentDate = new Date();
   }
 
   findNextAlarmTime(badger: Badger): number {
