@@ -19,7 +19,6 @@
     "vue-router": "^4.0.1"
   },
   "devDependencies": {
-    "@types/chrome": "0.0.124",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "@vue/cli-plugin-babel": "~4.5.0",
