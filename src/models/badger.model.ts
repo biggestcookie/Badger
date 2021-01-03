@@ -8,14 +8,16 @@ export enum Weekday {
   SATURDAY
 }
 
-export type HourMinute = [number, number];
+export interface HourMinute {
+  hour: number;
+  minute: number;
+}
 
 export interface Badger {
   id: number;
   name: string;
   description?: string;
-  days: Weekday[];
+  days: Set<Weekday>;
   interval: number;
-  startTimes: HourMinute[];
-  endTimes: HourMinute[];
+  timeRanges: Array<[HourMinute, HourMinute]>;
 }

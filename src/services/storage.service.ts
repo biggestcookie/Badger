@@ -16,7 +16,7 @@ export class StorageService {
     ]);
     if (!badgerRecord.badgers || prefsRecord.prefs) {
       await this.createUserData();
-      BackgroundApp.badgers = {};
+      BackgroundApp.badgers = {};f
       BackgroundApp.userPrefs = {} as UserPrefs;
     } else {
       BackgroundApp.badgers = badgerRecord.badgers;
