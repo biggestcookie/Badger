@@ -9,8 +9,19 @@
                 Hello!
               </h1>
               <p>Subtitle</p>
-              <a class="button" @click="create">Click to create</a>
-              <a class="button" @click="fetchAll">Click for notif</a>
+              <a class="button" @click="badger.create">Click to create</a>
+              <a class="button" @click="badger.testNotif">Click for notif</a>
+            </div>
+            <div class="block">
+              <div
+                v-for="badger in badger.badgers"
+                v-bind:key="badger.id"
+                class="card"
+              >
+                <div class="card-content">
+                  {{ badger.name }}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -26,33 +37,10 @@
 </style>
 
 <script lang="ts">
-import { Vue } from "vue-class-component";
-import * as Messaging from "@/utils/messaging";
-import { Badger, Weekday } from "@/models/badger.model";
+import { useBadgers } from "@/use/badgers";
+import { setup, Vue } from "vue-class-component";
 
 export default class Popup extends Vue {
-  badgers: Badger[] = [];
-
-  async mounted() {
-    this.badgers = await Messaging.fetchBadgers();
-  }
-
-  async create() {
-    const mockBadger: Badger = {
-      id: new Date().getTime(),
-      name: "mock badger",
-      enabled: true,
-      days: new Set([Weekday.MONDAY]),
-      interval: 5,
-      timeRanges: [
-        [
-          { hour: 0, minute: 1 },
-          { hour: 11, minute: 59 }
-        ]
-      ]
-    };
-    await Messaging.saveBadger(mockBadger);
-    this.badgers.push(mockBadger);
-  }
+  badger = setup(() => useBadgers());
 }
 </script>

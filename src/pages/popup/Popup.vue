@@ -7,14 +7,6 @@
             <h1 class="title">
               hello
             </h1>
-            <a class="button" @click="create">
-              Click for badger
-            </a>
-            <div v-for="badger in badgers" v-bind:key="badger.id" class="card">
-              <div class="card-content">
-                {{ badger.name }}
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -37,7 +29,7 @@ import "chrome-extension-async";
 export default class Popup extends Vue {
   mounted() {
     chrome.tabs.create({
-      url: "chrome://extensions/?options=" + chrome.runtime.id
+      url: `chrome-extension://${chrome.runtime.id}/options.html`
     });
   }
 }

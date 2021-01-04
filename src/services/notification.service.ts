@@ -1,5 +1,3 @@
-import config from "@/assets/config.json";
-import { BackgroundApp } from "@/background";
 import { Badger } from "@/models/badger.model";
 import "chrome-extension-async";
 import Notifications = chrome.notifications;
@@ -11,7 +9,7 @@ export class NotificationService {
   }
 
   private init() {
-    this.registerButtonListeners();
+    // this.registerButtonListeners();
   }
 
   registerButtonListeners() {
@@ -21,7 +19,6 @@ export class NotificationService {
   }
 
   fireNotif(badger: Badger) {
-    // display different buttons for mac and pc
     const notifOptions = {
       iconUrl: "icons/16.png",
       type: "basic",
@@ -35,10 +32,6 @@ export class NotificationService {
       buttons: [
         {
           title: "Dismiss"
-        },
-        {
-          title: `Snooze ${BackgroundApp.userPrefs.snoozeTime ||
-            config.defaultPrefs.snoozeTime} minutes`
         }
       ]
     } as NotificationOptions;

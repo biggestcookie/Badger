@@ -1,7 +1,7 @@
 import { BackgroundApp } from "@/background";
 import { Badger } from "@/models/badger.model";
 import { UserPrefs } from "@/models/prefs.model";
-import "chrome-extension-async";
+// import "chrome-extension-async";
 import Local = chrome.storage.local;
 
 export class StorageService {
@@ -16,7 +16,7 @@ export class StorageService {
     ]);
     if (!badgerRecord.badgers || prefsRecord.prefs) {
       await this.createUserData();
-      BackgroundApp.badgers = {};f
+      BackgroundApp.badgers = {};
       BackgroundApp.userPrefs = {} as UserPrefs;
     } else {
       BackgroundApp.badgers = badgerRecord.badgers;
