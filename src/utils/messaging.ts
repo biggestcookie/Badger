@@ -3,7 +3,7 @@ import {
   BaseMessage,
   DeleteMessage,
   MessageType,
-  PostMessage
+  SaveMessage
 } from "@/models/message.model";
 import "chrome-extension-async";
 import Runtime = chrome.runtime;
@@ -16,9 +16,9 @@ export async function fetchBadgers(): Promise<Badger[]> {
   return badgerMap ? Object.values(badgerMap) : [];
 }
 
-export async function setBadger(newBadger: Badger) {
-  const postMessage: PostMessage = {
-    type: MessageType.POST,
+export async function saveBadger(newBadger: Badger) {
+  const postMessage: SaveMessage = {
+    type: MessageType.SAVE,
     badger: newBadger
   };
   await Runtime.sendMessage(postMessage);

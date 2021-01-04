@@ -1,13 +1,18 @@
 import { Badger } from "@/models/badger.model";
 import {
   DeleteMessage,
+  FetchMessage,
+  FetchType,
   MessageType,
-  PostMessage
+  SaveMessage,
+  ToggleMessage
 } from "@/models/message.model";
 import { AlarmService } from "@/services/alarm.service";
 import { StorageService } from "@/services/storage.service";
 import { UserPrefs } from "./models/prefs.model";
 import Runtime = chrome.runtime;
+
+type ResponseFunction = (response: any) => void;
 
 export class BackgroundApp {
   private readonly alarmService: AlarmService;
@@ -31,10 +36,10 @@ export class BackgroundApp {
     Runtime.onMessage.addListener((msg, _, sendResponse) => {
       switch (msg.type) {
         case MessageType.FETCH:
-          sendResponse(BackgroundApp.badgers);
+          this.onFetch(msg, sendResponse);
           break;
-        case MessageType.POST:
-          this.onPost(msg, sendResponse);
+        case MessageType.SAVE:
+          this.onSave(msg, sendResponse);
           break;
         case MessageType.DELETE:
           this.onDelete(msg, sendResponse);
@@ -44,15 +49,29 @@ export class BackgroundApp {
     });
   }
 
-  async onPost(msg: PostMessage, sendResponse: (response: any) => void) {
-    // TODO: Register alarm
+  onFetch(msg: FetchMessage, sendResponse: ResponseFunction) {
+    let response;
+    if (msg.fetchType === FetchType.BADGERS) {
+      response = BackgroundApp.badgers;
+    } else if (msg.fetchType === FetchType.PREFS) {
+      response = BackgroundApp.userPrefs;
+    }
+    sendResponse(response);
+  }
+
+  async onSave(msg: SaveMessage, sendResponse: ResponseFunction) {
     await this.storageService.storeBadger(msg.badger);
     this.alarmService.createAlarm(msg.badger);
     sendResponse(true);
   }
 
-  async onDelete(msg: DeleteMessage, sendResponse: (response: any) => void) {
+  onToggle(msg: ToggleMessage, sendResponse: ResponseFunction) {
+    console.log;
+  }
+
+  async onDelete(msg: DeleteMessage, sendResponse: ResponseFunction) {
     await this.storageService.removeBadger(msg.badgerId);
+    this.alarmService.removeAlarm(msg.badgerId);
     sendResponse(true);
   }
 }

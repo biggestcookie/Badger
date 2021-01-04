@@ -44,7 +44,11 @@ export class AlarmService {
       when: nextAlarmTime,
       periodInMinutes: badger.interval
     };
-    Alarms.create(badger.name, newAlarm);
+    Alarms.create(badger.id.toString(), newAlarm);
+  }
+
+  removeAlarm(badgerId: number) {
+    Alarms.clear(badgerId.toString());
   }
 
   /*   

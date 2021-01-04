@@ -31,17 +31,21 @@ import * as Messaging from "@/utils/messaging";
 import { Badger, Weekday } from "@/models/badger.model";
 
 export default class Popup extends Vue {
-  create() {
-    const mockBadger = {
-      id: 1,
-      name: "mock badger",
-      days: [Weekday.SUNDAY, Weekday.MONDAY]
-    } as Badger;
-    Messaging.setBadger(mockBadger);
+  badgers: Badger[] = [];
+
+  async mounted() {
+    this.badgers = await Messaging.fetchBadgers();
   }
-  async fetchAll() {
-    const allBadgers = await Messaging.fetchBadgers();
-    console.log(allBadgers);
+
+  async create() {
+    const mockBadger: Badger = {
+      id: new Date().getTime(),
+      name: "mock badger",
+      days: new Set([Weekday.SUNDAY, Weekday.MONDAY]),
+      interval: 5
+    };
+    await Messaging.saveBadger(mockBadger);
+    this.badgers.push(mockBadger);
   }
 }
 </script>

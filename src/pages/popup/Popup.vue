@@ -32,22 +32,13 @@
 import { Vue } from "vue-class-component";
 import * as Messaging from "@/utils/messaging";
 import { Badger, Weekday } from "@/models/badger.model";
+import "chrome-extension-async";
 
 export default class Popup extends Vue {
-  badgers: Badger[] = [];
-
-  async mounted() {
-    this.badgers = await Messaging.fetchBadgers();
-  }
-
-  async create() {
-    const mockBadger = {
-      id: new Date().getTime(),
-      name: "mock badger",
-      days: [Weekday.SUNDAY, Weekday.MONDAY]
-    } as Badger;
-    await Messaging.setBadger(mockBadger);
-    this.badgers.push(mockBadger);
+  mounted() {
+    chrome.tabs.create({
+      url: "chrome://extensions/?options=" + chrome.runtime.id
+    });
   }
 }
 </script>
