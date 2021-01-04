@@ -3,7 +3,6 @@ import { Badger } from "./badger.model";
 export enum MessageType {
   FETCH,
   SAVE,
-  TOGGLE,
   DELETE
 }
 
@@ -16,17 +15,12 @@ export interface BaseMessage {
   type: MessageType;
 }
 
-export interface FetchMessage {
+export interface FetchMessage extends BaseMessage {
   fetchType: FetchType;
 }
 
 export interface SaveMessage extends BaseMessage {
   badger: Badger;
-}
-
-export interface ToggleMessage extends BaseMessage {
-  badgerId: number;
-  enabled: boolean;
 }
 
 export interface DeleteMessage extends BaseMessage {

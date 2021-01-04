@@ -41,8 +41,15 @@ export default class Popup extends Vue {
     const mockBadger: Badger = {
       id: new Date().getTime(),
       name: "mock badger",
-      days: new Set([Weekday.SUNDAY, Weekday.MONDAY]),
-      interval: 5
+      enabled: true,
+      days: new Set([Weekday.MONDAY]),
+      interval: 5,
+      timeRanges: [
+        [
+          { hour: 0, minute: 1 },
+          { hour: 11, minute: 59 }
+        ]
+      ]
     };
     await Messaging.saveBadger(mockBadger);
     this.badgers.push(mockBadger);

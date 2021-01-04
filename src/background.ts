@@ -4,8 +4,7 @@ import {
   FetchMessage,
   FetchType,
   MessageType,
-  SaveMessage,
-  ToggleMessage
+  SaveMessage
 } from "@/models/message.model";
 import { AlarmService } from "@/services/alarm.service";
 import { StorageService } from "@/services/storage.service";
@@ -61,12 +60,10 @@ export class BackgroundApp {
 
   async onSave(msg: SaveMessage, sendResponse: ResponseFunction) {
     await this.storageService.storeBadger(msg.badger);
-    this.alarmService.createAlarm(msg.badger);
+    msg.badger.enabled
+      ? this.alarmService.createAlarm(msg.badger)
+      : this.alarmService.removeAlarm(msg.badger.id);
     sendResponse(true);
-  }
-
-  onToggle(msg: ToggleMessage, sendResponse: ResponseFunction) {
-    console.log;
   }
 
   async onDelete(msg: DeleteMessage, sendResponse: ResponseFunction) {

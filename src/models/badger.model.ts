@@ -17,6 +17,7 @@ export interface Badger {
   id: number;
   name: string;
   description?: string;
+  enabled: boolean;
   days: Set<Weekday>;
   interval: number;
   timeRanges: Array<[HourMinute, HourMinute]>;

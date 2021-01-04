@@ -1,7 +1,8 @@
 import { Badger } from "@/models/badger.model";
 import {
-  BaseMessage,
   DeleteMessage,
+  FetchMessage,
+  FetchType,
   MessageType,
   SaveMessage
 } from "@/models/message.model";
@@ -9,8 +10,9 @@ import "chrome-extension-async";
 import Runtime = chrome.runtime;
 
 export async function fetchBadgers(): Promise<Badger[]> {
-  const fetchMessage: BaseMessage = {
-    type: MessageType.FETCH
+  const fetchMessage: FetchMessage = {
+    type: MessageType.FETCH,
+    fetchType: FetchType.BADGERS
   };
   const badgerMap = await Runtime.sendMessage(fetchMessage);
   return badgerMap ? Object.values(badgerMap) : [];
