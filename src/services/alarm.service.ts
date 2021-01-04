@@ -1,5 +1,5 @@
 import { BackgroundApp } from "@/background";
-import { Badger, Weekday, HourMinute } from "@/models/badger.model";
+import { Badger, HourMinute, Weekday } from "@/models/badger.model";
 import { NotificationService } from "@/services/notification.service";
 import "chrome-extension-async";
 import Alarms = chrome.alarms;
@@ -39,6 +39,7 @@ export class AlarmService {
 
   createAlarm(badger: Badger) {
     const nextAlarmTime = this.findNextAlarmTime(badger);
+    console.log(`Next alarm: ${new Date(nextAlarmTime)}`);
     const newAlarm: Alarms.AlarmCreateInfo = {
       when: nextAlarmTime,
       periodInMinutes: badger.interval
@@ -78,28 +79,50 @@ export class AlarmService {
   }
 
   findNextAlarmTime(badger: Badger): number {
-    let newDate = new Date();
-    newDate.setSeconds(0);
-    newDate.setMilliseconds(0);
+    let currentDate = new Date();
+    currentDate.setSeconds(0);
+    currentDate.setMilliseconds(0);
+
+    const dateString = currentDate.toDateString();
+    const currentTime = currentDate.getTime();
+
     if (this.isDayValid(badger.days)) {
-      const dateString = newDate.toDateString();
+      // If alarm is today, check if current date is between time ranges
       badger.timeRanges.forEach((timeRange, index) => {
-        if
-      })
+        if (index !== badger.timeRanges.length - 1) {
+          const endTime = this.getDateFromHourMinute(
+            badger.timeRanges[index][0]
+          ).getTime();
+          const nextStartTime = this.getDateFromHourMinute(
+            badger.timeRanges[index + 1][0]
+          ).getTime();
+          if (currentTime >= endTime) {
+            return nextStartTime;
+          } else if (currentTime >= nextStartTime) {
+            return (
+              Math.ceil(
+                (currentTime + badger.interval * 60 * 1000) / badger.interval
+              ) * badger.interval
+            );
+          }
+        }
+      });
     }
 
     // If alarm not today, find nearest day and set to earliest start time
-    const currentDay = newDate.getDay();
+    const currentDay = currentDate.getDay();
     const validDays = [...badger.days.values(), currentDay].sort();
     const currentDayIndex = validDays.indexOf(currentDay);
     const dayDifference =
       currentDayIndex === validDays.length - 1
         ? validDays[0] - (currentDay - 7)
         : validDays[currentDayIndex + 1] - currentDay;
-    newDate = new Date(newDate.getTime() + dayDifference * dayMilliseconds);
-    newDate.setHours(badger.timeRanges[0][0].hour);
-    newDate.setMinutes(badger.timeRanges[0][0].minute);
-    return newDate.getTime();
+    currentDate = new Date(
+      currentDate.getTime() + dayDifference * dayMilliseconds
+    );
+    currentDate.setHours(badger.timeRanges[0][0].hour);
+    currentDate.setMinutes(badger.timeRanges[0][0].minute);
+    return currentDate.getTime();
   }
 
   isDayValid(validDays: Set<Weekday>) {
