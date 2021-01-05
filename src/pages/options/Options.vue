@@ -10,7 +10,7 @@
               </h1>
               <p>Subtitle</p>
               <a class="button" @click="badger.create">Click to create</a>
-              <a class="button" @click="badger.testNotif">Click for notif</a>
+              <!-- <a class="button" @click="badger.testNotif">Click for notif</a> -->
             </div>
             <div class="block">
               <div
