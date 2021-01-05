@@ -4,7 +4,7 @@ import * as Messaging from "@/utils/messaging";
 import { fetchBadgers } from "@/utils/messaging";
 import { onMounted, Ref, ref } from "vue";
 
-export function useBadgers() {
+export function useBadger() {
   const badgers: Ref<Badger[]> = ref([]);
   const notificationService = new NotificationService();
 
