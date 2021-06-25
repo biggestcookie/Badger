@@ -1,7 +1,7 @@
-import { Badger, Weekday } from "@/models/badger.model";
-import { NotificationService } from "@/services/notification.service";
-import * as Messaging from "@/utils/messaging";
-import { fetchBadgers } from "@/utils/messaging";
+import { Badger, Weekday } from "/@/models/badger.model";
+import { NotificationService } from "/@/services/notification.service";
+import * as Messaging from "/@/utils/messaging";
+import { fetchBadgers } from "/@/utils/messaging";
 import { onMounted, Ref, ref } from "vue";
 
 export function useBadger() {
@@ -22,9 +22,9 @@ export function useBadger() {
       timeRanges: [
         [
           { hour: 0, minute: 1 },
-          { hour: 11, minute: 59 }
-        ]
-      ]
+          { hour: 11, minute: 59 },
+        ],
+      ],
     };
     await Messaging.saveBadger(mockBadger);
     badgers.value.push(mockBadger);
@@ -37,6 +37,6 @@ export function useBadger() {
   return {
     badgers,
     create,
-    testNotif
+    testNotif,
   };
 }

@@ -1,18 +1,18 @@
-import { Badger } from "@/models/badger.model";
+import { Badger } from "/@/models/badger.model";
 import {
   DeleteMessage,
   FetchMessage,
   FetchType,
   MessageType,
-  SaveMessage
-} from "@/models/message.model";
+  SaveMessage,
+} from "/@/models/message.model";
 import "chrome-extension-async";
 import Runtime = chrome.runtime;
 
 export async function fetchBadgers(): Promise<Badger[]> {
   const fetchMessage: FetchMessage = {
     type: MessageType.FETCH,
-    fetchType: FetchType.BADGERS
+    fetchType: FetchType.BADGERS,
   };
   const badgerMap = await Runtime.sendMessage(fetchMessage);
   return badgerMap ? Object.values(badgerMap) : [];
@@ -21,7 +21,7 @@ export async function fetchBadgers(): Promise<Badger[]> {
 export async function saveBadger(newBadger: Badger) {
   const postMessage: SaveMessage = {
     type: MessageType.SAVE,
-    badger: newBadger
+    badger: newBadger,
   };
   await Runtime.sendMessage(postMessage);
 }
@@ -29,7 +29,7 @@ export async function saveBadger(newBadger: Badger) {
 export async function deleteBadger(badgerId: number) {
   const deleteMessage: DeleteMessage = {
     type: MessageType.DELETE,
-    badgerId
+    badgerId,
   };
   await Runtime.sendMessage(deleteMessage);
 }

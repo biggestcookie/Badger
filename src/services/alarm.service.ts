@@ -1,6 +1,6 @@
-import { BackgroundApp } from "@/background";
-import { Badger, HourMinute, Weekday } from "@/models/badger.model";
-import { NotificationService } from "@/services/notification.service";
+import { BackgroundApp } from "/@/background";
+import { Badger, HourMinute, Weekday } from "/@/models/badger.model";
+import { NotificationService } from "/@/services/notification.service";
 import "chrome-extension-async";
 import Alarms = chrome.alarms;
 
@@ -20,7 +20,7 @@ export class AlarmService {
   }
 
   registerAlarmListener() {
-    Alarms.onAlarm.addListener(async alarm => {
+    Alarms.onAlarm.addListener(async (alarm) => {
       const currentBadger = BackgroundApp.badgers[Number(alarm.name)];
       this.notificationService.fireNotif(currentBadger);
       if (!this.isBadgerActive(currentBadger)) {
@@ -32,8 +32,8 @@ export class AlarmService {
   }
 
   registerCurrentAlarms() {
-    Object.values(BackgroundApp.badgers).forEach(badger =>
-      this.createAlarm(badger)
+    Object.values(BackgroundApp.badgers).forEach((badger) =>
+      this.createAlarm(badger),
     );
   }
 
@@ -42,7 +42,7 @@ export class AlarmService {
     console.log(`Next alarm: ${new Date(nextAlarmTime)}`);
     const newAlarm: Alarms.AlarmCreateInfo = {
       when: nextAlarmTime,
-      periodInMinutes: badger.interval
+      periodInMinutes: badger.interval,
     };
     Alarms.create(badger.id.toString(), newAlarm);
   }
@@ -95,17 +95,17 @@ export class AlarmService {
       badger.timeRanges.forEach((timeRange, index) => {
         if (index !== badger.timeRanges.length - 1) {
           const endTime = this.getDateFromHourMinute(
-            badger.timeRanges[index][0]
+            badger.timeRanges[index][0],
           ).getTime();
           const nextStartTime = this.getDateFromHourMinute(
-            badger.timeRanges[index + 1][0]
+            badger.timeRanges[index + 1][0],
           ).getTime();
           if (currentTime >= endTime) {
             return nextStartTime;
           } else if (currentTime >= nextStartTime) {
             return (
               Math.ceil(
-                (currentTime + badger.interval * 60 * 1000) / badger.interval
+                (currentTime + badger.interval * 60 * 1000) / badger.interval,
               ) * badger.interval
             );
           }
@@ -122,7 +122,7 @@ export class AlarmService {
         ? validDays[0] - (currentDay - 7)
         : validDays[currentDayIndex + 1] - currentDay;
     currentDate = new Date(
-      currentDate.getTime() + dayDifference * dayMilliseconds
+      currentDate.getTime() + dayDifference * dayMilliseconds,
     );
     currentDate.setHours(badger.timeRanges[0][0].hour);
     currentDate.setMinutes(badger.timeRanges[0][0].minute);

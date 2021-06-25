@@ -1,12 +1,14 @@
 {
   "name": "Badger",
+  "manifest_version": 3,
+  "version": "0.0.1",
   "description": "__MSG_manifestDescription__",
   "author": "bigcookie",
   "homepage_url": "https://github.com/biggestcookie/Badger",
   "icons": {
-    "16": "icons/16.png",
-    "48": "icons/48.png",
-    "128": "icons/128.png"
+    "16": "assets/icons/16.png",
+    "48": "assets/icons/48.png",
+    "128": "assets/icons/128.png"
   },
   "permissions": [
     "alarms",
@@ -14,23 +16,22 @@
     "storage"
   ],
   "default_locale": "en",
-  "manifest_version": 2,
   "background": {
     "scripts": [
       "js/background.js"
     ],
     "persistent": false
   },
-  "browser_action": {
-    "default_popup": "popup.html",
+  "action": {
+    "default_popup": "pages/popup/index.html",
     "default_title": "Badger",
     "default_icon": {
-      "19": "icons/19.png",
-      "38": "icons/38.png"
+      "19": "assets/icons/19.png",
+      "38": "assets/icons/38.png"
     }
   },
   "options_ui": {
-    "page": "options.html",
+    "page": "pages/options/index.html",
     "open_in_tab": true,
     "chrome_style": false
   },

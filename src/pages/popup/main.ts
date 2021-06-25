@@ -1,4 +1,4 @@
 import { createApp } from "vue";
-import Popup from "./Popup.vue";
+import Popup from "./popup.vue";
 
 createApp(Popup).mount("#app");

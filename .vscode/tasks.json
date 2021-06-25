@@ -3,14 +3,6 @@
 	"tasks": [
 		{
 			"type": "npm",
-			"script": "serve",
-			"problemMatcher": "$tsc-watch",
-			"group": "build",
-			"label": "npm: serve",
-			"detail": "vue-cli-service build --mode development --watch"
-		},
-		{
-			"type": "npm",
 			"script": "build",
 			"problemMatcher": "$tsc",
 			"group": {
@@ -18,7 +10,7 @@
 				"isDefault": true
 			},
 			"label": "npm: build",
-			"detail": "vue-cli-service build"
+			"detail": "vite build"
 		}
 	]
 }

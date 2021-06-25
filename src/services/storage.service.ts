@@ -1,6 +1,6 @@
-import { BackgroundApp } from "@/background";
-import { Badger } from "@/models/badger.model";
-import { UserPrefs } from "@/models/prefs.model";
+import { BackgroundApp } from "/@/background";
+import { Badger } from "/@/models/badger.model";
+import { UserPrefs } from "/@/models/prefs.model";
 // import "chrome-extension-async";
 import Local = chrome.storage.local;
 
@@ -12,7 +12,7 @@ export class StorageService {
   async init() {
     const [badgerRecord, prefsRecord] = await Promise.all([
       this.fetchBadgerMap(),
-      this.fetchUserPrefs()
+      this.fetchUserPrefs(),
     ]);
     if (!badgerRecord.badgers || prefsRecord.prefs) {
       await this.createUserData();
@@ -30,7 +30,7 @@ export class StorageService {
       badgers: {},
       prefs: {
         // snoozeTime: config.defaultPrefs.snoozeTime
-      }
+      },
     });
   }
 

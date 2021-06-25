@@ -1,13 +1,13 @@
-import { Badger } from "@/models/badger.model";
+import { Badger } from "/@/models/badger.model";
 import {
   DeleteMessage,
   FetchMessage,
   FetchType,
   MessageType,
   SaveMessage
-} from "@/models/message.model";
-import { AlarmService } from "@/services/alarm.service";
-import { StorageService } from "@/services/storage.service";
+} from "/@/models/message.model";
+import { AlarmService } from "/@/services/alarm.service";
+import { StorageService } from "/@/services/storage.service";
 import { UserPrefs } from "./models/prefs.model";
 import Runtime = chrome.runtime;
 

@@ -1,4 +1,4 @@
-import { Badger } from "@/models/badger.model";
+import { Badger } from "/@/models/badger.model";
 import "chrome-extension-async";
 import Notifications = chrome.notifications;
 import NotificationOptions = chrome.notifications.NotificationOptions;
@@ -14,7 +14,7 @@ export class NotificationService {
 
   registerButtonListeners() {
     Notifications.onButtonClicked.addListener((notif, button) =>
-      console.log(`Notif: ${notif} button: ${button}`)
+      console.log(`Notif: ${notif} button: ${button}`),
     );
   }
 
@@ -31,9 +31,9 @@ export class NotificationService {
       isClickable: false,
       buttons: [
         {
-          title: "Dismiss"
-        }
-      ]
+          title: "Dismiss",
+        },
+      ],
     } as NotificationOptions;
     Notifications.create("test", notifOptions);
   }
@@ -51,12 +51,12 @@ export class NotificationService {
       isClickable: false,
       buttons: [
         {
-          title: "button1"
+          title: "button1",
         },
         {
-          title: "button2"
-        }
-      ]
+          title: "button2",
+        },
+      ],
     } as NotificationOptions;
     Notifications.create("test", notifOptions);
   }

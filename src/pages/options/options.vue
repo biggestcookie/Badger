@@ -37,7 +37,7 @@
 </style>
 
 <script lang="ts">
-import { useBadger } from "@/use/badgers";
+import { useBadger } from "/@/use/badgers";
 import { setup, Vue } from "vue-class-component";
 
 export default class Popup extends Vue {
