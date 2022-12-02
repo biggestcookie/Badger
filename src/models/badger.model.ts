@@ -8,6 +8,8 @@ export enum Weekday {
   SATURDAY
 }
 
+export type ClockTime = [hour: number, minute: number]
+
 export interface HourMinute {
   hour: number;
   minute: number;

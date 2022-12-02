@@ -6,58 +6,94 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@types/node": "^15.12.4",
-    "@vitejs/plugin-vue": "^1.2.3",
-    "@vue/compiler-sfc": "^3.0.8",
-    "@vuedx/typecheck": "^0.7.4",
-    "@vuedx/typescript-plugin-vue": "^0.7.4",
-    "bulma": "^0.9.3",
+    "bulma": "^0.9.4",
     "chrome-extension-async": "^3.4.1",
-    "ionicons": "^5.3.0",
-    "sass": "^1.35.1",
-    "typescript": "~3.9.3",
-    "vite": "^2.3.8",
-    "vite-plugin-chrome-extension": "^0.0.7",
-    "vue": "^3.0.5",
-    "vue-class-component": "^8.0.0-rc.1",
-    "vue-router": "^4.0.2",
-    "webextension-polyfill-ts": "^0.25.0"
+    "ionicons": "^6.0.4",
+    "sass": "^1.56.1",
+    "vue": "^3.2.45",
+    "vue-router": "^4.1.6",
+    "webextension-polyfill": "^0.10.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.27.0",
-    "@typescript-eslint/parser": "^4.27.0",
-    "@vue/eslint-config-prettier": "^6.0.0",
-    "@vue/eslint-config-typescript": "^7.0.0",
-    "eslint": "^7.29.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-vue": "^7.11.1",
-    "prettier": "^1.19.1"
+    "@types/node": "^18.11.0",
+    "@types/webextension-polyfill": "^0.9.2",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "@vitejs/plugin-vue": "^3.2.0",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "@vue/eslint-config-typescript": "^11.0.2",
+    "eslint": "^8.29.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.8.0",
+    "prettier": "^2.8.0",
+    "typescript": "~4.9.3",
+    "vite": "^3.2.4",
+    "vite-plugin-chrome-extension": "^0.0.7",
+    "vue-tsc": "^1.0.10"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "singleQuote": false,
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "trailingComma": "es5",
+    "endOfLine": "auto"
   },
   "eslintConfig": {
     "root": true,
     "env": {
       "node": true
     },
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
     "extends": [
       "eslint:recommended",
       "plugin:@typescript-eslint/recommended",
       "plugin:vue/vue3-essential",
-      "@vue/typescript/recommended",
       "prettier"
     ],
-    "parserOptions": {
-      "ecmaVersion": 2020
-    },
+    "overrides": [
+      {
+        "files": [
+          "*.vue"
+        ],
+        "parser": "vue-eslint-parser",
+        "parserOptions": {
+          "parser": "@typescript-eslint/parser"
+        }
+      }
+    ],
     "rules": {
-      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/no-non-null-assertion": "off",
+      "@typescript-eslint/no-empty-interface": "off",
       "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-unused-vars": "off",
-      "vue/no-multiple-template-root": "off"
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          "argsIgnorePattern": "^_",
+          "varsIgnorePattern": "^_"
+        }
+      ],
+      "@typescript-eslint/ban-types": "off",
+      "vue/no-deprecated-slot-attribute": "off",
+      "vue/multi-word-component-names": "off",
+      "no-console": "warn",
+      "no-debugger": "warn"
+    },
+    "globals": {
+      "defineProps": "readonly",
+      "defineEmits": "readonly",
+      "defineExpose": "readonly",
+      "withDefaults": "readonly"
     }
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
-    "not dead"
+    "not dead",
+    "not ie 11"
   ]
 }
