@@ -10,17 +10,10 @@
     "48": "assets/icons/48.png",
     "128": "assets/icons/128.png"
   },
-  "permissions": [
-    "alarms",
-    "notifications",
-    "storage"
-  ],
+  "permissions": ["alarms", "notifications", "storage"],
   "default_locale": "en",
   "background": {
-    "scripts": [
-      "js/background.js"
-    ],
-    "persistent": false
+    "service_worker": "background.js"
   },
   "action": {
     "default_popup": "pages/popup/index.html",

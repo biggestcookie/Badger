@@ -1,7 +1,7 @@
-import { BackgroundApp } from "/@/background";
-import { Badger, HourMinute, Weekday } from "/@/models/badger.model";
-import { NotificationService } from "/@/services/notification.service";
 import "chrome-extension-async";
+import { BackgroundApp } from "../background";
+import { NotificationService } from "./notification.service";
+import { Badger, HourMinute, Weekday } from "/@/models/badger.model";
 import Alarms = chrome.alarms;
 
 const dayMilliseconds = 24 * 60 * 60 * 1000;
@@ -33,7 +33,7 @@ export class AlarmService {
 
   registerCurrentAlarms() {
     Object.values(BackgroundApp.badgers).forEach((badger) =>
-      this.createAlarm(badger),
+      this.createAlarm(badger)
     );
   }
 
@@ -95,17 +95,17 @@ export class AlarmService {
       badger.timeRanges.forEach((timeRange, index) => {
         if (index !== badger.timeRanges.length - 1) {
           const endTime = this.getDateFromHourMinute(
-            badger.timeRanges[index][0],
+            badger.timeRanges[index][0]
           ).getTime();
           const nextStartTime = this.getDateFromHourMinute(
-            badger.timeRanges[index + 1][0],
+            badger.timeRanges[index + 1][0]
           ).getTime();
           if (currentTime >= endTime) {
             return nextStartTime;
           } else if (currentTime >= nextStartTime) {
             return (
               Math.ceil(
-                (currentTime + badger.interval * 60 * 1000) / badger.interval,
+                (currentTime + badger.interval * 60 * 1000) / badger.interval
               ) * badger.interval
             );
           }
@@ -122,7 +122,7 @@ export class AlarmService {
         ? validDays[0] - (currentDay - 7)
         : validDays[currentDayIndex + 1] - currentDay;
     currentDate = new Date(
-      currentDate.getTime() + dayDifference * dayMilliseconds,
+      currentDate.getTime() + dayDifference * dayMilliseconds
     );
     currentDate.setHours(badger.timeRanges[0][0].hour);
     currentDate.setMinutes(badger.timeRanges[0][0].minute);

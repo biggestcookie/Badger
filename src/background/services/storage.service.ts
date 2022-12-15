@@ -1,4 +1,4 @@
-import { BackgroundApp } from "/@/background";
+import { BackgroundApp } from "../background";
 import { Badger } from "/@/models/badger.model";
 import { UserPrefs } from "/@/models/prefs.model";
 // import "chrome-extension-async";

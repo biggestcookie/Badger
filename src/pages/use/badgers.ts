@@ -1,8 +1,8 @@
+import { onMounted, Ref, ref } from "vue";
+import { NotificationService } from "../../background/services/notification.service";
 import { Badger, Weekday } from "/@/models/badger.model";
-import { NotificationService } from "/@/services/notification.service";
 import * as Messaging from "/@/utils/messaging";
 import { fetchBadgers } from "/@/utils/messaging";
-import { onMounted, Ref, ref } from "vue";
 
 export function useBadger() {
   const badgers: Ref<Badger[]> = ref([]);
