@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "vite build"
+    "build": "vite build",
+    "dev": "vite dev"
   },
   "dependencies": {
     "bulma": "^0.9.4",
